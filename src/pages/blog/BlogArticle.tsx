@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Calendar, User, Share2, AlertCircle } from 'lucide-react';
+import { ArrowLeft, User, Share2, AlertCircle } from 'lucide-react';
 
 const articleContent = {
   'tax-residency-183-day-rule': {

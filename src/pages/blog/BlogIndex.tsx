@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { BookOpen, ArrowRight, Calendar, User } from 'lucide-react';
+import { BookOpen, ArrowRight, Calendar } from 'lucide-react';
 
 const posts = [
   {

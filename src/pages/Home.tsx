@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, ShieldCheck, Map, TrendingUp, Sparkles, BookOpen, Calculator, Globe2, HelpCircle, Calendar } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Map, TrendingUp, Sparkles, Calculator, Globe2, Calendar } from 'lucide-react';
 
 export default function Home() {
   return (

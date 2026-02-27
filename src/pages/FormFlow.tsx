@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../store/useStore';
-import { ArrowRight, ArrowLeft, CheckCircle2, DollarSign, Briefcase, Globe2, Heart, Target, Sparkles, MapPin, Plus, Trash2, Calendar } from 'lucide-react';
+import { ArrowRight, ArrowLeft, CheckCircle2, DollarSign, Briefcase, Globe2, Heart, Target, MapPin, Plus, Trash2, Calendar } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 const steps = [
