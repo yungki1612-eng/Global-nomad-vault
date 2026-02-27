@@ -4,6 +4,8 @@ import Home from './pages/Home';
 import FormFlow from './pages/FormFlow';
 import Report from './pages/Report';
 import Tracker from './pages/Tracker';
+import BlogIndex from './pages/blog/BlogIndex';
+import BlogArticle from './pages/blog/BlogArticle';
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
           <Route path="form" element={<FormFlow />} />
           <Route path="report" element={<Report />} />
           <Route path="tracker" element={<Tracker />} />
+          <Route path="blog" element={<BlogIndex />} />
+          <Route path="blog/:id" element={<BlogArticle />} />
         </Route>
       </Routes>
     </BrowserRouter>

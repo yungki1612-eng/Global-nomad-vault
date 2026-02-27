@@ -1,12 +1,18 @@
-import { AlertTriangle, Calendar, RefreshCcw, Bell } from 'lucide-react';
+import { AlertTriangle, Calendar, RefreshCcw, Bell, MapPin } from 'lucide-react';
 import { cn } from '../lib/utils';
+import { useStore } from '../store/useStore';
 
 export default function Tracker() {
-  const countries = [
-    { name: 'Thailand', days: 142, limit: 180, status: 'danger', icon: '🇹🇭' },
-    { name: 'Portugal', days: 45, limit: 183, status: 'safe', icon: '🇵🇹' },
-    { name: 'Indonesia (Bali)', days: 22, limit: 183, status: 'safe', icon: '🇮🇩' },
-  ];
+  const { userData } = useStore();
+  
+  // Use planned countries from store, fallback to defaults if empty
+  const countries = userData.plannedCountries.length > 0 
+    ? userData.plannedCountries.map(c => ({ ...c, limit: 180, status: c.days > 135 ? 'danger' : 'safe' }))
+    : [
+        { name: 'Thailand', days: 142, limit: 180, status: 'danger' },
+        { name: 'Portugal', days: 45, limit: 183, status: 'safe' },
+        { name: 'Indonesia (Bali)', days: 22, limit: 183, status: 'safe' },
+      ];
 
   return (
     <div className="max-w-4xl mx-auto py-12 px-4 space-y-10">
@@ -41,7 +47,7 @@ export default function Tracker() {
 
         <div className="p-8 space-y-10">
           {countries.map((country, idx) => {
-            const percentage = (country.days / country.limit) * 100;
+            const percentage = Math.min((country.days / country.limit) * 100, 100);
             const isRisk = country.days > (country.limit * 0.75);
 
             return (
@@ -49,7 +55,7 @@ export default function Tracker() {
                 <div className="flex justify-between items-end mb-4">
                   <div className="space-y-1">
                     <h3 className="text-xl font-extrabold text-slate-900 flex items-center gap-2">
-                      <span className="text-2xl">{country.icon}</span>
+                      <MapPin className="w-5 h-5 text-indigo-500" />
                       {country.name}
                     </h3>
                     <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">
@@ -83,7 +89,7 @@ export default function Tracker() {
                       <p className="text-sm font-bold text-rose-900">Tax Residency Warning</p>
                       <p className="text-xs text-rose-800 opacity-80 leading-relaxed">
                         You have {country.limit - country.days} days left until you trigger tax residency in {country.name}. 
-                        Relocation advised before <strong>April 14th, 2026</strong>.
+                        Relocation advised soon.
                       </p>
                     </div>
                   </div>
@@ -91,6 +97,11 @@ export default function Tracker() {
               </div>
             );
           })}
+          {userData.plannedCountries.length === 0 && (
+            <div className="text-center py-10 bg-slate-50 border-2 border-dashed border-slate-100 rounded-3xl">
+              <p className="text-slate-400 text-sm">No live data yet. Start a simulation to see your tracking.</p>
+            </div>
+          )}
         </div>
       </div>
 

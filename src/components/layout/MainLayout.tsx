@@ -31,6 +31,9 @@ export function MainLayout() {
               <Link to="/tracker" className={cn("hover:text-indigo-600 transition-colors flex items-center gap-1.5", location.pathname === '/tracker' && "text-indigo-600")}>
                 <BookOpen className="w-4 h-4" /> Day Tracker
               </Link>
+              <Link to="/blog" className={cn("hover:text-indigo-600 transition-colors flex items-center gap-1.5", location.pathname.startsWith('/blog') && "text-indigo-600")}>
+                <Globe className="w-4 h-4" /> Intelligence
+              </Link>
               <Link to="/report" className={cn("hover:text-indigo-600 transition-colors flex items-center gap-1.5", location.pathname === '/report' && "text-indigo-600")}>
                 <Shield className="w-4 h-4" /> My Strategy
               </Link>

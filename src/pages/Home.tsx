@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, ShieldCheck, Map, TrendingUp, Sparkles, BookOpen, Calculator, Globe2, HelpCircle } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Map, TrendingUp, Sparkles, BookOpen, Calculator, Globe2, HelpCircle, Calendar } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -48,10 +48,40 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AdSense Approval Content Section: Knowledge Base (Text Rich) */}
+      {/* Latest Intelligence (Blog) Section */}
+      <section className="space-y-12">
+        <div className="flex justify-between items-end px-4">
+          <div className="space-y-2">
+            <h2 className="text-3xl font-black text-slate-900 tracking-tight">Nomad Intelligence</h2>
+            <p className="text-slate-500">Expert analysis on global tax and legal trends.</p>
+          </div>
+          <Link to="/blog" className="text-indigo-600 font-bold hover:underline hidden md:flex items-center gap-2">
+            View All Articles <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
+          {[
+            { id: 'tax-residency-183-day-rule', title: 'Ultimate Guide to 183-Day Rule', category: 'Tax Strategy', date: 'Feb 15, 2026' },
+            { id: 'best-nomad-visas-2026', title: 'Top 5 Digital Nomad Visas', category: 'Visas', date: 'Feb 10, 2026' },
+            { id: 'choosing-nomad-health-insurance', title: 'Global Health Insurance Guide', category: 'Insurance', date: 'Feb 05, 2026' }
+          ].map((post) => (
+            <Link key={post.id} to={`/blog/${post.id}`} className="glass-card p-6 hover:shadow-xl transition-all group">
+              <div className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest mb-3">{post.category}</div>
+              <h3 className="text-lg font-bold text-slate-900 mb-6 group-hover:text-indigo-600 transition-colors">{post.title}</h3>
+              <div className="flex items-center justify-between text-[10px] text-slate-400 font-bold">
+                <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> {post.date}</span>
+                <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Knowledge Base (Text Rich) Section */}
       <section className="max-w-4xl mx-auto px-4 py-16 bg-white rounded-[3rem] border border-slate-100 shadow-sm space-y-16">
         <div className="text-center space-y-4">
-          <h2 className="text-3xl font-black text-slate-900 tracking-tight">Digital Nomad Knowledge Base</h2>
+          <h2 className="text-3xl font-black text-slate-900 tracking-tight">Legal Knowledge Base</h2>
           <p className="text-slate-500">Expert insights on global mobility and tax optimization.</p>
         </div>
 
@@ -62,7 +92,7 @@ export default function Home() {
               <h3 className="font-bold uppercase text-sm tracking-widest">Tax Residency Rules</h3>
             </div>
             <p className="text-sm text-slate-600 leading-relaxed">
-              The <strong>183-day rule</strong> is a primary test used by many countries to determine if a person is a tax resident. Triggering this status often means you are liable for taxes on your global income. Nomad Vault helps you track these critical dates across multiple jurisdictions to prevent accidental double taxation.
+              The <strong>183-day rule</strong> is a primary test used by many countries to determine if a person is a tax resident. Nomad Vault helps you track these critical dates across multiple jurisdictions to prevent accidental double taxation.
             </p>
           </div>
 
@@ -72,35 +102,8 @@ export default function Home() {
               <h3 className="font-bold uppercase text-sm tracking-widest">Global Health Standards</h3>
             </div>
             <p className="text-sm text-slate-600 leading-relaxed">
-              Unlike traditional travel insurance, <strong>International Health Insurance</strong> (IPMI) provides comprehensive coverage including wellness checks and hospitalization. For nomads, having a plan that covers "Out-of-Area" incidents is vital for true freedom of movement.
+              For nomads, having a plan that covers "Out-of-Area" incidents is vital for true freedom of movement. We analyze providers like SafetyWing and PassportCard for global compatibility.
             </p>
-          </div>
-        </div>
-
-        {/* AdSense Slot: Mid Content (336x280) */}
-        <div className="bg-slate-50 border-2 border-dashed border-slate-100 rounded-2xl py-12 flex flex-col items-center justify-center text-center">
-          <span className="text-[10px] font-bold text-slate-300 uppercase tracking-[0.2em] mb-4">AdSense Managed Slot</span>
-          <div className="w-[336px] h-[280px] bg-white border border-slate-200 rounded-xl shadow-inner flex items-center justify-center text-slate-200 text-sm">
-            Content-Adaptive Ad
-          </div>
-        </div>
-
-        <div className="space-y-8">
-          <div className="flex items-center gap-2 font-black text-xl text-slate-900">
-            <HelpCircle className="w-6 h-6 text-indigo-500" />
-            Frequently Asked Questions
-          </div>
-          <div className="grid grid-cols-1 gap-6">
-            {[
-              { q: "How does the 183-day rule affect my taxes?", a: "In most countries, spending more than 183 days within a fiscal year automatically makes you a tax resident, meaning your global income could be subject to local tax laws." },
-              { q: "What is the difference between tax residency and visa status?", a: "Visa status determines your right to stay, while tax residency determines your tax obligations. You can have a valid visa but still be a tax resident of another country." },
-              { q: "Do I need insurance if my home country provides it?", a: "Most domestic insurance plans do not provide coverage once you are abroad for more than 30-90 days. Nomad-specific insurance is required for long-term travelers." }
-            ].map((faq, i) => (
-              <div key={i} className="p-6 border border-slate-100 rounded-2xl hover:bg-slate-50 transition-colors">
-                <h4 className="font-bold text-slate-900 mb-2 text-sm">{faq.q}</h4>
-                <p className="text-xs text-slate-500 leading-relaxed">{faq.a}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>

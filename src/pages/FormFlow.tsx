@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../store/useStore';
-import { ArrowRight, ArrowLeft, CheckCircle2, DollarSign, Briefcase, Globe2, Heart, Target, Sparkles } from 'lucide-react';
+import { ArrowRight, ArrowLeft, CheckCircle2, DollarSign, Briefcase, Globe2, Heart, Target, Sparkles, MapPin, Plus, Trash2, Calendar } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 const steps = [
@@ -13,8 +13,9 @@ const steps = [
 
 export default function FormFlow() {
   const [currentStep, setCurrentStep] = useState(1);
+  const [newCountry, setNewCountry] = useState({ name: '', days: 0, visaType: 'Tourist' });
   const navigate = useNavigate();
-  const { userData, updateUserData } = useStore();
+  const { userData, updateUserData, addPlannedCountry, removePlannedCountry } = useStore();
 
   const handleNext = () => {
     if (currentStep < 4) setCurrentStep((prev) => prev + 1);
@@ -23,6 +24,13 @@ export default function FormFlow() {
 
   const handleBack = () => {
     if (currentStep > 1) setCurrentStep((prev) => prev - 1);
+  };
+
+  const handleAddCountry = () => {
+    if (newCountry.name && newCountry.days > 0) {
+      addPlannedCountry({ ...newCountry });
+      setNewCountry({ name: '', days: 0, visaType: 'Tourist' });
+    }
   };
 
   return (
@@ -117,12 +125,12 @@ export default function FormFlow() {
             <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">
               <div className="space-y-2">
                 <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Global Journey</h2>
-                <p className="text-slate-500 text-lg">Where will you be making memories (and paying taxes) in 2026?</p>
+                <p className="text-slate-500 text-lg">Build your 2026 route to check residency triggers.</p>
               </div>
               
               <div className="space-y-6">
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Primary Tax Residency</label>
+                  <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Primary Tax Residency (Origin)</label>
                   <input 
                     type="text" 
                     value={userData.currentCountry}
@@ -131,15 +139,68 @@ export default function FormFlow() {
                     placeholder="e.g. United States"
                   />
                 </div>
-                
-                <div className="p-6 bg-slate-900 rounded-3xl text-white space-y-4">
-                  <div className="flex items-center gap-2 text-indigo-400 font-bold text-sm uppercase tracking-widest">
-                    <Sparkles className="w-4 h-4" /> Feature Preview
+
+                {/* Country List Builder */}
+                <div className="space-y-4">
+                  <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Planned Stays</label>
+                  
+                  <div className="bg-slate-50 p-6 rounded-3xl border border-slate-100 space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="relative">
+                        <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                        <input 
+                          type="text" 
+                          placeholder="Country Name"
+                          value={newCountry.name}
+                          onChange={(e) => setNewCountry({ ...newCountry, name: e.target.value })}
+                          className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-sm outline-none focus:border-indigo-500"
+                        />
+                      </div>
+                      <div className="relative">
+                        <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                        <input 
+                          type="number" 
+                          placeholder="Planned Days"
+                          value={newCountry.days || ''}
+                          onChange={(e) => setNewCountry({ ...newCountry, days: Number(e.target.value) })}
+                          className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-sm outline-none focus:border-indigo-500"
+                        />
+                      </div>
+                    </div>
+                    <button 
+                      onClick={handleAddCountry}
+                      className="w-full py-3 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition-colors flex items-center justify-center gap-2 text-sm shadow-md shadow-slate-200"
+                    >
+                      <Plus className="w-4 h-4" /> Add Destination
+                    </button>
                   </div>
-                  <h4 className="text-xl font-bold">Planned Route Builder</h4>
-                  <p className="text-slate-400 text-sm leading-relaxed">
-                    Soon you'll be able to map out your entire year. Our AI will automatically flag countries where you're at risk of triggering tax residency based on your stay duration.
-                  </p>
+
+                  <div className="space-y-3">
+                    {userData.plannedCountries.map((country, idx) => (
+                      <div key={idx} className="flex items-center justify-between p-4 bg-white border border-slate-100 rounded-2xl shadow-sm animate-in slide-in-from-left-2 duration-300">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600 font-bold text-xs">
+                            {idx + 1}
+                          </div>
+                          <div>
+                            <div className="font-bold text-slate-900 text-sm">{country.name}</div>
+                            <div className="text-xs text-slate-400 uppercase tracking-widest">{country.days} Days</div>
+                          </div>
+                        </div>
+                        <button 
+                          onClick={() => removePlannedCountry(idx)}
+                          className="p-2 text-slate-300 hover:text-rose-500 hover:bg-rose-50 rounded-xl transition-all"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    ))}
+                    {userData.plannedCountries.length === 0 && (
+                      <div className="text-center py-8 border-2 border-dashed border-slate-100 rounded-3xl text-slate-400 text-sm">
+                        No destinations added yet.
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

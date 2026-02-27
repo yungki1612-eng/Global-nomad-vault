@@ -24,6 +24,8 @@ export type UserData = {
 interface AppState {
   userData: UserData;
   updateUserData: (data: Partial<UserData>) => void;
+  addPlannedCountry: (country: { name: string; days: number; visaType: string }) => void;
+  removePlannedCountry: (index: number) => void;
   resetUserData: () => void;
 }
 
@@ -45,5 +47,19 @@ export const useStore = create<AppState>((set) => ({
   userData: initialUserData,
   updateUserData: (data) =>
     set((state) => ({ userData: { ...state.userData, ...data } })),
+  addPlannedCountry: (country) =>
+    set((state) => ({
+      userData: {
+        ...state.userData,
+        plannedCountries: [...state.userData.plannedCountries, country],
+      },
+    })),
+  removePlannedCountry: (index) =>
+    set((state) => ({
+      userData: {
+        ...state.userData,
+        plannedCountries: state.userData.plannedCountries.filter((_, i) => i !== index),
+      },
+    })),
   resetUserData: () => set({ userData: initialUserData }),
 }));
