@@ -1,4 +1,4 @@
-import { MapPin, AlertTriangle, Calendar, RefreshCcw, Bell } from 'lucide-react';
+import { AlertTriangle, Calendar, RefreshCcw, Bell } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 export default function Tracker() {
