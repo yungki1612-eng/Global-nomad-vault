@@ -28,14 +28,14 @@ export function MainLayout() {
               <Link to="/" className={cn("hover:text-indigo-600 transition-colors flex items-center gap-1.5", location.pathname === '/' && "text-indigo-600")}>
                 <HomeIcon className="w-4 h-4" /> Home
               </Link>
+              <Link to="/compare" className={cn("hover:text-indigo-600 transition-colors flex items-center gap-1.5", location.pathname === '/compare' && "text-indigo-600")}>
+                <Scale className="w-4 h-4" /> Compare
+              </Link>
               <Link to="/tracker" className={cn("hover:text-indigo-600 transition-colors flex items-center gap-1.5", location.pathname === '/tracker' && "text-indigo-600")}>
                 <BookOpen className="w-4 h-4" /> Day Tracker
               </Link>
               <Link to="/blog" className={cn("hover:text-indigo-600 transition-colors flex items-center gap-1.5", location.pathname.startsWith('/blog') && "text-indigo-600")}>
                 <Globe className="w-4 h-4" /> Intelligence
-              </Link>
-              <Link to="/report" className={cn("hover:text-indigo-600 transition-colors flex items-center gap-1.5", location.pathname === '/report' && "text-indigo-600")}>
-                <Shield className="w-4 h-4" /> My Strategy
               </Link>
             </nav>
 
@@ -71,19 +71,19 @@ export function MainLayout() {
               </p>
             </div>
             <div>
-              <h4 className="font-bold text-slate-900 mb-6 uppercase text-xs tracking-widest">Solutions</h4>
+              <h4 className="font-bold text-slate-900 mb-6 uppercase text-xs tracking-widest">Company</h4>
               <ul className="space-y-4 text-sm text-slate-500">
-                <li><Link to="/tracker" className="hover:text-indigo-600 transition-colors">183-Day Tracker</Link></li>
-                <li><Link to="/report" className="hover:text-indigo-600 transition-colors">Tax Simulation</Link></li>
-                <li><Link to="/form" className="hover:text-indigo-600 transition-colors">Insurance Match</Link></li>
+                <li><Link to="/about" className="hover:text-indigo-600 transition-colors">About Us</Link></li>
+                <li><Link to="/contact" className="hover:text-indigo-600 transition-colors">Contact Us</Link></li>
+                <li><Link to="/blog" className="hover:text-indigo-600 transition-colors">Intelligence Blog</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold text-slate-900 mb-6 uppercase text-xs tracking-widest">Legal & Compliance</h4>
               <ul className="space-y-4 text-sm text-slate-500">
-                <li><a href="#" className="hover:text-indigo-600 transition-colors flex items-center gap-2"><Scale className="w-4 h-4" /> Terms of Service</a></li>
-                <li><a href="#" className="hover:text-indigo-600 transition-colors flex items-center gap-2"><ShieldAlert className="w-4 h-4" /> Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-indigo-600 transition-colors">Cookie Policy</a></li>
+                <li><Link to="/terms" className="hover:text-indigo-600 transition-colors flex items-center gap-2"><Scale className="w-4 h-4" /> Terms of Service</Link></li>
+                <li><Link to="/privacy" className="hover:text-indigo-600 transition-colors flex items-center gap-2"><ShieldAlert className="w-4 h-4" /> Privacy Policy</Link></li>
+                <li><Link to="/contact" className="hover:text-indigo-600 transition-colors">Partner Program</Link></li>
               </ul>
             </div>
           </div>

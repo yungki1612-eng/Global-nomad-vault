@@ -33,5 +33,12 @@ Global Nomad Vault is a web application designed to help digital nomads calculat
 - Created UI for tracking days spent in each country against the 183-day rule (`Tracker.tsx`).
 - Implemented warning indicators for approaching tax residency limits.
 
-**Phase 5: Firebase Integration (Pending)**
+**Phase 5: AdSense Approval & Utility Expansion** (Completed)
+- **Legal Infrastructure:** Added mandatory pages for AdSense (About, Contact, Privacy Policy, Terms of Service).
+- **Utility Tools:** Implemented a Country Comparison Engine (`CountryCompare.tsx`) for side-by-side destination analysis.
+- **SEO Content:** Enhanced blog section with high-quality articles on 183-day rules, nomad visas, and insurance.
+- **UI/UX Enhancement:** Added breadcrumbs, a comprehensive footer, and better navigation structure.
+
+**Phase 6: Firebase Integration (Pending)**
 - Auth and Firestore setup for saving user profiles and reports.
+

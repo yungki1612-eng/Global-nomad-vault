@@ -6,6 +6,11 @@ import Report from './pages/Report';
 import Tracker from './pages/Tracker';
 import BlogIndex from './pages/blog/BlogIndex';
 import BlogArticle from './pages/blog/BlogArticle';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
+import CountryCompare from './pages/CountryCompare';
 
 function App() {
   return (
@@ -18,6 +23,11 @@ function App() {
           <Route path="tracker" element={<Tracker />} />
           <Route path="blog" element={<BlogIndex />} />
           <Route path="blog/:id" element={<BlogArticle />} />
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="privacy" element={<PrivacyPolicy />} />
+          <Route path="terms" element={<TermsOfService />} />
+          <Route path="compare" element={<CountryCompare />} />
         </Route>
       </Routes>
     </BrowserRouter>
